@@ -17,14 +17,11 @@ void insere();
 void remove();
 //--------------------------
 
-
-int main()
-{
+int main() {
 	menu();
 }
 
-void menu()
-{
+void menu() {
 	int op = 0;
 	while (op != 4) {
 		system("cls"); // somente no windows
@@ -56,10 +53,8 @@ void menu()
 	}
 }
 
-void inicializar()
-{
-
-	// se a lista já possuir elementos
+void inicializar() {
+	// se a lista jï¿½ possuir elementos
 	// libera a memoria ocupada
 	NO* aux = inicio;
 	while (aux != NULL) {
@@ -71,30 +66,46 @@ void inicializar()
 	inicio = NULL;
 	fim = NULL;
 	cout << "Fila inicializada \n";
-
 }
 
-
-void insere()
-{
+void insere() {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+
 	if (novo == NULL)
-	{
 		return;
-	}
 
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-
+	if(fim == NULL) {
+		fim = novo;
+		inicio = novo;
+		return;
+	}
+	
+	fim->prox = novo;
+	fim = novo;
 }
 
-void remove()
-{
+void remove() {
+	if(inicio == NULL) {
+		cout << "Fila vazia." << endl;
+		return;
+	}
 
+	cout << "O primeiro elemento era: " << inicio->valor << endl;
 
+	NO* secondElement = inicio->prox;
+	free(inicio);
 
+	inicio = secondElement;
+
+	if(inicio == NULL) {
+		cout << "Fila Vazia." << endl;
+		return;
+	}
+
+	cout << "O primeiro elemento agora e: " << inicio->valor << endl;
 }
-
